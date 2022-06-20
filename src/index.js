@@ -14,6 +14,20 @@ app.post("/sign-up", (req, res) => {
     res.send("OK");
 });
 
+app.get("/tweets/:userName", (req, res) => {
+    const userName = req.params.userName;
+    const tweetAuthor = users.find(user => user.username === userName);
+    const selectedTweets = tweets.filter(tweet => {
+        return tweet.username === userName;
+    });
+    
+    const formattedTweets = selectedTweets.map(tweet => {
+        return {...tweet, avatar: tweetAuthor.avatar};
+    });
+
+    res.send(formattedTweets);
+})
+
 app.get("/tweets", (req, res) => {
     const userTweets = tweets.map(tweet => {
         const tweetAuthor = users.find(user => user.username === tweet.username);
