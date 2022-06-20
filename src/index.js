@@ -11,18 +11,21 @@ let tweets = [];
 app.post("/sign-up", (req, res) => {
     const user = req.body;
     users.push(user);
-    console.log(user);
     res.send("OK");
 });
 
 app.get("/tweets", (req, res) => {
-
+    const userTweets = tweets.map(tweet => {
+        const tweetAuthor = users.find(user => user.username === tweet.username);
+        return {...tweet, avatar: tweetAuthor.avatar};
+    })
+    console.log(userTweets);
+    res.send(userTweets);
 });
 
 app.post("/tweets", (req, res) => {
     const tweet = req.body;
     tweets.push(tweet);
-    console.log(tweet);
     res.send("OK");
 });
 
