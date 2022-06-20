@@ -19,8 +19,8 @@ app.get("/tweets", (req, res) => {
         const tweetAuthor = users.find(user => user.username === tweet.username);
         return {...tweet, avatar: tweetAuthor.avatar};
     })
-    console.log(userTweets);
-    res.send(userTweets);
+
+    res.send(userTweets.slice(-10));
 });
 
 app.post("/tweets", (req, res) => {
