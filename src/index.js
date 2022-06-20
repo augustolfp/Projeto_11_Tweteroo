@@ -11,7 +11,7 @@ let tweets = [];
 app.post("/sign-up", (req, res) => {
     const user = req.body;
     users.push(user);
-    res.send("OK");
+    res.status(201).send("OK");
 });
 
 app.get("/tweets/:userName", (req, res) => {
@@ -20,7 +20,7 @@ app.get("/tweets/:userName", (req, res) => {
     const selectedTweets = tweets.filter(tweet => {
         return tweet.username === userName;
     });
-    
+
     const formattedTweets = selectedTweets.map(tweet => {
         return {...tweet, avatar: tweetAuthor.avatar};
     });
@@ -40,7 +40,7 @@ app.get("/tweets", (req, res) => {
 app.post("/tweets", (req, res) => {
     const tweet = req.body;
     tweets.push(tweet);
-    res.send("OK");
+    res.status(201).send("OK");
 });
 
 app.listen(5000);
