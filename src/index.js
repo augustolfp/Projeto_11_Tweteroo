@@ -2,8 +2,12 @@ import express from 'express';
 
 const app = express();
 
-app.post("/sign-up", (req, res) => {
+let users = [];
 
+app.post("/sign-up", (req, res) => {
+    const user = req.body;
+    users.push(user);
+    res.send("OK");
 });
 
 app.get("/tweets", (req, res) => {
